@@ -1,0 +1,67 @@
+/* NavigationBar.css */
+
+/* 整个导航栏容器 */
+.Container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white; /* 设置背景颜色 */
+    padding: 10px 40px; /* 设置上下和左右的内边距 */
+    box-shadow: 0px 1px 5px rgba(47, 84, 235, 0.4); /* 这里定义阴影效果 */
+
+  }
+  
+  /* Logo 图片样式 */
+  .Container img {
+    width: 50px;
+    height: 100%;
+  }
+  
+  /* 导航链接列表样式 */
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  /* 导航链接样式 */
+  li {
+    margin: auto 0px;
+    margin-right: 50px; /* 设置链接之间的右边距 */
+  }
+  
+  /* 导航链接文字样式 */
+  a {
+    text-decoration: none; /* 去掉链接下划线 */
+    color: black; /* 设置文字颜色为白色 */
+    font-weight: bold; /* 设置文字粗体 */
+    font-size: 16px; /* 设置文字大小 */
+  }
+
+
+
+  
+  
+/* 导航链接的基本样式 */
+.nav-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+    padding: 5px 10px;
+  }
+  
+  /* 导航链接的 hover 样式 */
+  .nav-link:hover {
+    background-color: #f0f0f0; /* 鼠标悬停时的背景颜色 */
+    color: #333; /* 鼠标悬停时的文字颜色 */
+    border-radius: 6px;
+  }
+  
+  /* 导航链接的点击样式 */
+  .nav-link.active-link {
+    background-color: pink; /* 活动链接的背景颜色 */
+    color: #333; /* 活动链接的文字颜色 */
+  }

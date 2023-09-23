@@ -1,0 +1,102 @@
+.container{
+    position: relative;
+}
+
+.userIcon{
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 25%;
+    transition: transform 0.3s ease; /* 添加过渡效果 */
+    z-index: 3;
+}
+
+.userIcon img{
+    width: 50px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 25%;
+    z-index: 3;
+}
+
+.userIcon:hover{
+    transform: translateY(50%);
+    transform: translateY(50%) scale(1.5); /* 放大到 1.2 倍大小 */
+    z-index: 3;
+}
+
+.userIcon img:hover{
+    border: 1px solid #ccc;
+}
+
+
+.userIcon:hover + .dropdown {
+    visibility: visible;
+    max-height: 500px; /* 设置一个足够大的 max-height，以确保容纳所有内容 */
+    transition: max-height 0.3s ease-in; /* 添加过渡效果 */
+}
+
+.dropdown {
+    position: absolute;
+    visibility: hidden;
+    max-height: 0; /* 初始状态下将 max-height 设置为 0，使其不可见 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    max-width: 200px;
+
+    background-color: white;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 30px;
+    padding-bottom: 0px;
+    margin-top: 15px;
+    transform: translateX(-40%);
+    z-index: 2;
+    transition: max-height 0.3s ease-out; /* 添加过渡效果 */
+}
+
+/* 纵向排列 <ul> 内部的 <li> 元素 */
+.dropdown ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none; /* 去除列表样式 */
+    padding: 0;
+}
+
+/* 横向排列 <li> 内部的内容 */
+.dropdown ul li {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    margin-bottom: 20px; /* 间距 */
+}
+
+/* 样式第一个 <li>，即 user info */
+.userInfo {
+    /* 这里可以设置特殊样式，横向排列 */
+    justify-content: space-between; /* 左右对齐 */
+}
+
+.userInfo>div{
+    margin-right: 40px;
+    text-align: center;
+}
+
+.userInfo .type{
+    color: #bfbfbf;
+    font-size: 12px;
+}
+
+.userInfo p{
+    margin: 0px;
+}
+
+/* 其他 <li> 的样式，横向排列 */
+.dropdown ul li:not(.userInfo) {
+    /* 这里可以设置特殊样式，横向排列 */
+    position: relative;
+    width: 100%;
+}
+
+.dropdown li img{
+    position: absolute;
+    right: 0%;
+    width: 16px;
+} 

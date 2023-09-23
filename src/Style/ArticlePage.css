@@ -1,0 +1,39 @@
+/* Article.css */
+.article-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .article-header {
+    margin-bottom: 20px;
+  }
+  
+  .author-info {
+    font-size: 14px;
+    color: #555;
+    padding: 0px 20px;
+  }
+  
+  .author {
+    margin-right: 10px;
+  }
+  
+  .date {
+    color: #999;
+    float: right;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .article-content {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  

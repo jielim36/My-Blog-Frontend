@@ -1,0 +1,34 @@
+.contact {
+    position: fixed;
+    left: 15px; /* 将其固定在网页左边 */
+    top: 50%; /* 垂直居中，可以根据需要调整 */
+    transform: translateY(-50%); /* 使其垂直居中 */
+    display: flex;
+    flex-direction: column; /* 垂直排列图标 */
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* 这里定义阴影效果 */
+    border-radius: 5px;
+  }
+  
+  .contact-images {
+    display: flex;
+    flex-direction: column; /* 垂直排列图标 */
+    align-items: center; /* 图标居中对齐 */
+    padding: 0px 3px;
+  }
+  
+  .contact-images a {
+    display: block;
+    text-align: center; /* 文本水平居中 */
+    text-decoration: none;
+    padding: 5px 0;
+  }
+
+  .contact-images img{
+    width: 40px;
+  }
+  
+  .contact-images a:not(:last-child) {
+    border-bottom: 1px solid #ccc; /* 添加下边框 */
+  }
+  

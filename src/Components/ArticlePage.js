@@ -167,6 +167,7 @@ const ArticlePage = () => {
             <h1 className="title">{article.title}</h1>
             <div className="author-info">
               <span className="author">Author: {article.id}</span>
+              <span></span>
               <span className="date">Published Date: {article.date}</span>
             </div>
           </div>

@@ -3,12 +3,16 @@ import J_logo from '../Assets/J.png'
 import { Link, NavLink } from "react-router-dom";
 import '../Style/NavigationBar.css';
 import UserIcon from "./UserIcon";
+import SearchBar from "./SearchBar";
 
 const NavigationBar = () => {
     
     return (
         <div className="Container">
             <img src={J_logo} alt="None"></img>
+            <div className="searchBar">
+                <SearchBar />
+            </div>
             <ul>
                 <li className="userInfo">
                     <UserIcon />

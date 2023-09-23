@@ -2,6 +2,16 @@ import React, { useState } from 'react'
 import '../Style/Home.css';
 import { NavLink} from 'react-router-dom';
 import Contact from './Contact';
+import backgrount_keyboard from '../Assets/background_keyboard.jpg';
+import background01 from '../Assets/background01.jpg';
+import background03 from '../Assets/background03.jpg';
+import background04 from '../Assets/background04.jpg';
+import welcome from '../Assets/welcome.png';
+import sidebar01 from '../Assets/sidebar_background01.png';
+import sidebar02 from '../Assets/sidebar_background02.jpg';
+import SidebarBackground from './SidebarBackground';
+
+
 
 // Dummy data for articles and sidebar
 const articles = [
@@ -202,13 +212,11 @@ const Home = () => {
     <>
       <div className="home-container">
         <div className="dashboard">
-          {/* Dashboard content goes here */}
-          <h2>Dashboard</h2>
-          {/* Add dashboard components */}
+          <img src={welcome} />
         </div>
         <div className="article-section">
           <div className="article-tabs">
-            <NavLink to="/home/recommended" 
+            <NavLink to="" 
             className="tab-button" 
             style={({isActive})=> {return isActive ? {borderBottomColor:"#2f54eb" , color:'black'} : null}}>
               Recommended
@@ -261,6 +269,7 @@ const Home = () => {
         </div>
       </div>
       < Contact />
+      <SidebarBackground />
     </>
   );
 };

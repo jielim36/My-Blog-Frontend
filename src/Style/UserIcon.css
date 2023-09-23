@@ -1,5 +1,6 @@
 .container{
     position: relative;
+    box-sizing: border-box;
 }
 
 .userIcon{
@@ -18,22 +19,24 @@
     z-index: 3;
 }
 
-.userIcon:hover{
-    transform: translateY(50%);
-    transform: translateY(50%) scale(1.5); /* 放大到 1.2 倍大小 */
+.userIcon.hovered{
+    transition-delay: 0.1s;
+    transform: translateY(60%) scale(1.5); /* 放大到 1.2 倍大小 */
     z-index: 3;
 }
 
-.userIcon img:hover{
-    border: 1px solid #ccc;
+.userIcon.hovered img{
+    transition-delay: 0.2s;
+    border: 2px solid #2f54eb;
 }
 
 
-.userIcon:hover + .dropdown {
+.dropdown.visible {
     visibility: visible;
     max-height: 500px; /* 设置一个足够大的 max-height，以确保容纳所有内容 */
     transition: max-height 0.3s ease-in; /* 添加过渡效果 */
 }
+
 
 .dropdown {
     position: absolute;
@@ -46,11 +49,12 @@
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 30px;
-    padding-bottom: 0px;
+    padding-bottom: 15px;
     margin-top: 15px;
     transform: translateX(-40%);
     z-index: 2;
     transition: max-height 0.3s ease-out; /* 添加过渡效果 */
+
 }
 
 /* 纵向排列 <ul> 内部的 <li> 元素 */
@@ -65,19 +69,30 @@
 .dropdown ul li {
     display: flex;
     align-items: center; /* 垂直居中对齐 */
-    margin-bottom: 20px; /* 间距 */
+    padding: 10px 0px;
 }
 
 /* 样式第一个 <li>，即 user info */
 .userInfo {
     /* 这里可以设置特殊样式，横向排列 */
     justify-content: space-between; /* 左右对齐 */
+    
 }
 
 .userInfo>div{
-    margin-right: 40px;
+    margin-right: 35px;
     text-align: center;
 }
+
+/* 改变userinfo中的div字体颜色 */
+.dropdown ul li.userInfo div:hover {
+    color: #2f54eb; /* 设置字体颜色 */
+  }
+  
+  /* 改变其他三个li元素的背景颜色 */
+  .dropdown ul li:not(.userInfo):hover {
+    background-color: #fafafa;
+  }  
 
 .userInfo .type{
     color: #bfbfbf;
@@ -93,10 +108,14 @@
     /* 这里可以设置特殊样式，横向排列 */
     position: relative;
     width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
 
 .dropdown li img{
     position: absolute;
     right: 0%;
     width: 16px;
-} 
+    height: 50%;
+}

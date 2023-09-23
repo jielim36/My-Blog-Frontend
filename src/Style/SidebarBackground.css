@@ -1,0 +1,16 @@
+.containerSidebar {
+    position: absolute;
+    top: 70%; 
+    right: 5%; 
+    width: 340px;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    border-radius: 25px;
+}
+
+.containerSidebar img{
+    width: 100%;
+    border-radius: 25px;
+
+}

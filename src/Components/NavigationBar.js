@@ -1,6 +1,6 @@
 import React from "react";
 import J_logo from '../Assets/J.png'
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../Style/NavigationBar.css';
 import UserIcon from "./UserIcon";
 import SearchBar from "./SearchBar";
@@ -9,7 +9,9 @@ const NavigationBar = () => {
     
     return (
         <div className="Container">
-            <img src={J_logo} alt="None"></img>
+            <NavLink to='/home'>
+                <img src={J_logo} alt="None"></img>
+            </NavLink>
             <div className="searchBar">
                 <SearchBar />
             </div>

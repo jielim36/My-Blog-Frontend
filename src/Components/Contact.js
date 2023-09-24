@@ -9,13 +9,13 @@ export default function Contact() {
     <div className="contact">
         <div className="contact-images">
             <a href="https://github.com/jielim36" target="_blank" rel="noopener noreferrer">
-                <img src={github_logo} alt="Image 1" />
+                <img src={github_logo} alt="github" />
             </a>
             <a href="https://www.linkedin.com/in/lim-yee-jie-589058263/" target="_blank" rel="noopener noreferrer">
-                <img src={linkedin_logo} alt="Image 2" />
+                <img src={linkedin_logo} alt="linkedin" />
             </a>
             <a href="link3.html" target="_blank" rel="noopener noreferrer">
-                <img src={instagram_logo} alt="Image 3" />
+                <img src={instagram_logo} alt="instagram" />
             </a>
         </div>
     </div>

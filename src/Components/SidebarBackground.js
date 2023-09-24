@@ -5,7 +5,7 @@ import '../Style/SidebarBackground.css'
 export default function SidebarBackground() {
   return (
     <div className='containerSidebar'>
-        <img src={sidebar_creator} />
+        <img src={sidebar_creator} alt='creator'/>
     </div>
   )
 }

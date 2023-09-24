@@ -1,0 +1,58 @@
+
+   /* 侧边栏容器 */
+   .sidebar {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    position: absolute; /* 固定位置 */
+    top: 30%; /* 从顶部20px处开始 */
+    right: 5%; /* 从右侧20px处开始 */
+    width: 300px; /* 设置宽度 */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* 这里定义阴影效果 */
+    user-select: none;
+  }
+  
+
+  .sidebar h2 {
+    color: #2f54eb;
+    font-size: 24px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    margin: 0px;
+  }
+  
+  .popular-articles {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popular-articles p{
+    display: inline-block;
+    margin-right: 15px;
+    color: #fa541c;
+  }
+  
+  .popular-articles li{
+    padding: 0px 5px;
+    width: 100%;
+    border-radius: 7px;
+    text-decoration: none;
+    color: black;
+    font-weight: medium;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 0px;
+  }
+  
+  .popular-articles li:last-child{
+    border: 0px;
+  }
+
+  .popular-articles li:hover {
+    background-color: #f5f5f5;
+  }
+  

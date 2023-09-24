@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../Style/UserIcon.css';
 import Ikun from '../Assets/ikun.png';
-import arrowDown from '../Assets/arrow-down.png';
 import arrowRight from '../Assets/arrow-right.png';
 
 export default function UserIcon() {

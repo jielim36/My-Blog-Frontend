@@ -1,2 +1,2 @@
 # My-Blog-Frondend
-Full stack pratrical project
+Full stack pratical project

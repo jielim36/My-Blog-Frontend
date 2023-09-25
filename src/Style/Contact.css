@@ -18,6 +18,12 @@
     align-items: center; /* 图标居中对齐 */
     padding: 0px 3px;
   }
+
+  .contact-images img:hover {
+    transition-delay: 0.1s;
+    transform: translateY(10%) scale(1.1);
+  }
+
   
   .contact-images a {
     display: block;
@@ -29,6 +35,7 @@
 
   .contact-images img{
     width: 40px;
+    transition: transform 0.3s ease; /* 添加过渡效果 */
   }
   
   .contact-images a:not(:last-child) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Style/UserIcon.css';
-import Ikun from '../Assets/ikun.png';
+import userIcon from '../Assets/labixiaoxin.jpg';
 import arrowRight from '../Assets/arrow-right.png';
 
 export default function UserIcon() {
@@ -21,7 +21,7 @@ export default function UserIcon() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <img src={Ikun} alt="User Icon" />
+        <img src={userIcon} alt="User Icon" />
       </div>
       <div
         className={`dropdown ${isHovered ? 'visible' : ''}`}

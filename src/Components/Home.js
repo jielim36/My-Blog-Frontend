@@ -1,117 +1,158 @@
-import React, { useEffect, useState } from 'react'
-import '../Style/Home.css';
-import { NavLink} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "../Style/Home.css";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import Contact from './Contact';
-import welcome from '../Assets/welcome.png';
-import SidebarBackground from './SidebarBackground';
-import TrendingSidebar from './TrendingSidebar';
+import Contact from "./Contact";
+import welcome from "../Assets/welcome.png";
+import SidebarBackground from "./SidebarBackground";
+import TrendingSidebar from "./TrendingSidebar";
+import view from "../Assets/view.png";
+import like from "../Assets/like.png";
+import { useQuery } from "@tanstack/react-query";
+import { fetchArticlesByLimit, fetchArticlesNumber, fetchTrendingArticlesByLimit } from "./FetchAPI";
 
 //create axios object
 const controller = new AbortController();
 
 const axObj = axios.create({
-    // method: 'GET',
-    baseURL: 'http://localhost:8080/',
-    signal: controller.signal,
+  // method: 'GET',
+  baseURL: "http://localhost:8080/",
+  signal: controller.signal,
 });
 
 const Home = () => {
-
   //Page state
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalArticles , setTotalArticles] = useState(0);
-  const [recommended , setRecommended] = useState(false);
-  const [latest , setLastest] = useState(true);
+  const [recommended, setRecommended] = useState(false);
+  const [latest, setLastest] = useState(true);
   const articlesPerPage = 8;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  // const currentArticles = articles.slice(indexOfFirstArticle, indexOfLastArticle);
-  const totalPages = Math.ceil(totalArticles / articlesPerPage);
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  //Request
-  const [data , setData] = useState();
-  const [isLoading , setIsLoading] = useState(true);
-  const [error , setError] = useState('');
+  //get the articles for a specific pages
+  const fetchArticlesByLimitPath = `/articles/latest/${indexOfFirstArticle}/${articlesPerPage}`;
+  const {
+    isLoading: articlesByLimitLoading,
+    isError: articlesByLimitIsError,
+    data: articlesByLimitData,
+    error: articlesByLimitError,
+  } = useQuery({
+    queryKey: ["articles", fetchArticlesByLimitPath],
+    queryFn: fetchArticlesByLimit,
+  });
 
-  //get the number of total articles
-  useEffect(()=>{
-    setIsLoading(true);
+  //get total number of articles for determine how many pages
+  const {
+    isLoading: totalNumberLoading,
+    isError: totalNumberIsError,
+    data: totalNumberData,
+    error: totalNumberError,
+  } = useQuery({
+    queryKey: ["articles", `/articles/total`],
+    queryFn: fetchArticlesNumber,
+  });
+  const totalPages = Math.ceil(totalNumberData / articlesPerPage);
 
-    axObj.get(`articles/total`)
-      .then(response => {
-        console.log("get total number:");
-        console.log(response.data);
-        setTotalArticles(response.data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setIsLoading(false);
-      });
-  },[]);
+  //get the most popular article in the last week
+  const {
+    isLoading: fetchTrendingIsLoading,
+    isError: fetchTrendingIsError,
+    data: trendingArticlesData,
+    error: fetchTrendingError,
+  } = useQuery({
+    queryKey: ['trendingArticles' , `/articles/trending/5`],
+    queryFn: fetchTrendingArticlesByLimit,
+  });
 
+  if (articlesByLimitLoading) {
+    return <h2>Is loading...</h2>;
+  }
+  if (articlesByLimitIsError) {
+    console.error("Error fetching articles:", articlesByLimitError);
+    return <div>Error: Unable to fetch article.</div>;
+  }
 
-  //when click page button
-  useEffect(()=>{
-    setIsLoading(true);
-
-    axObj.get(`articles/latest/${indexOfFirstArticle}/${articlesPerPage}`)
-      .then(response => {
-        console.log(response.data);
-        setData(response.data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setIsLoading(false);
-      });
-  },[currentPage]);
-
-  
-
-  if(isLoading){
+  if (totalNumberLoading || articlesByLimitLoading) {
     return <h2>Is loading...</h2>;
   }
 
+  if (totalNumberIsError) {
+    console.error("Error fetching article number:", totalNumberError);
+    return <div>Error: Unable to fetch article.</div>;
+  }
+
+
   const listActivated = (type) => {
-    if(type === 'recommended'){
+    if (type === "recommended") {
       setRecommended(true);
       setLastest(false);
-    }else{
+    } else {
       setRecommended(false);
       setLastest(true);
     }
-  }
+  };
+
+  // 格式化日期时间函数
+  const formatDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
 
   return (
     <>
       <div className="home-container">
         <div className="dashboard">
-          <img src={welcome} alt='welcomePage'/>
+          <img src={welcome} alt="welcomePage" />
         </div>
         <div className="article-section">
           <div className="article-tabs">
-            <div className={`listType ${recommended ? 'listActivated' : ''}`} onClick={()=>{listActivated('recommended')}}>
+            <div
+              className={`listType ${recommended ? "listActivated" : ""}`}
+              onClick={() => {
+                listActivated("recommended");
+              }}
+            >
               <p>Recommended</p>
             </div>
-            <div className={`listType ${latest ? 'listActivated' : ''}`} onClick={()=>{listActivated('latest')}}>
+            <div
+              className={`listType ${latest ? "listActivated" : ""}`}
+              onClick={() => {
+                listActivated("latest");
+              }}
+            >
               <p>Latest</p>
             </div>
           </div>
           <div className="article-list">
-            {data.map((article) => (
+            {articlesByLimitData.map((article) => (
               <div className="article-card" key={article.id}>
-                <NavLink to={`/articles/${article.articleId}`} >
+                <NavLink to={`/articles/${article.articleId}`}>
                   <h3>{article.title}</h3>
-                  <p className='authorInfo'>
-                    {article.authorId} | {article.publicationDate}
-                  </p>
                   <p>{article.content.slice(0, 30)}...</p>
+                  <p className="authorInfo">
+                    <p>{article.authorId}</p>
+                    <p>
+                      <img src={view} />
+                      {article.views}
+                    </p>
+                    <p>
+                      <img src={like} />
+                      {article.likes}
+                    </p>
+                    <p>{formatDate(article.publicationDate)}</p>
+                  </p>
                 </NavLink>
               </div>
             ))}
@@ -120,7 +161,7 @@ const Home = () => {
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index}
-                className={currentPage === index + 1 ? 'active-page' : 'page'}
+                className={currentPage === index + 1 ? "active-page" : "page"}
                 onClick={() => handlePageChange(index + 1)}
               >
                 {index + 1}
@@ -129,8 +170,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <TrendingSidebar articles={data} />
-      < Contact />
+      <TrendingSidebar/>
+      <Contact />
       <SidebarBackground />
     </>
   );

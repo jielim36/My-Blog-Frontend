@@ -2,47 +2,41 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../Style/ArticlePage.css";
 import Contact from "./Contact";
 import { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetchArticleById, updateArticleById } from "./FetchAPI";
 import axios from "axios";
-
-//create axios object
-const controller = new AbortController();
-
-const axObj = axios.create({
-  // method: 'GET',
-  baseURL: "http://localhost:8080/",
-  signal: controller.signal,
-});
 
 const ArticlePage = () => {
   const path = window.location.pathname;
+  const {
+    isLoading,
+    isError,
+    data: article,
+    error,
+  } = useQuery({
+    queryKey: ["articles", path],
+    queryFn: fetchArticleById,
+  });
 
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  
+  useEffect(()=>{
 
-  useEffect(() => {
-    setIsLoading(true);
+    const updateView_json = {
+      views: 1,
+    };
 
-    axObj
-      .get(path)
-      .then((response) => {
-        setData(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-  }, []);
+    axios.put(`http://localhost:8080${path}`, updateView_json);
+    
+  },[])
 
-  const article = data;
-
+  
   if (isLoading) {
     return <h2>Is loading...</h2>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (isError) {
+    console.error("Error fetching article:", error);
+    return <div>Error: Unable to fetch article.</div>;
   }
 
   return (

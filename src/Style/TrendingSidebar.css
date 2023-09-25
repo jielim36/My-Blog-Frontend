@@ -31,10 +31,17 @@
     flex-direction: column;
   }
 
-  .popular-articles p{
+  .popular-articles p:first-child{
     display: inline-block;
     margin-right: 15px;
     color: #fa541c;
+  }
+
+  .popular-articles p:last-child{
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: lighter;
+    font-size: 14px;
   }
   
   .popular-articles li{

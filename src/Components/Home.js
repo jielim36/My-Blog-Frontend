@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "../Style/Home.css";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Contact from "./Contact";
 import welcome from "../Assets/welcome.png";
 import SidebarBackground from "./SidebarBackground";
 import TrendingSidebar from "./TrendingSidebar";
+import { useQuery } from "@tanstack/react-query";
+import { NavLink } from "react-router-dom";
 import view from "../Assets/view.png";
 import like from "../Assets/like.png";
-import { useQuery } from "@tanstack/react-query";
-import { fetchArticlesByLimit, fetchArticlesNumber, fetchTrendingArticlesByLimit } from "./FetchAPI";
+import {
+  fetchArticlesByLimit,
+  fetchArticlesNumber,
+  fetchTrendingArticlesByLimit,
+} from "./FetchAPI";
+import SearchBar from "./SearchBar";
 
 //create axios object
 const controller = new AbortController();
@@ -23,18 +28,20 @@ const axObj = axios.create({
 const Home = () => {
   //Page state
   const [currentPage, setCurrentPage] = useState(1);
-  const [recommended, setRecommended] = useState(false);
-  const [latest, setLastest] = useState(true);
+  const [recommended, setRecommended] = useState(true);
+  const [latest, setLastest] = useState(false);
   const articlesPerPage = 8;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const [searchArticles , setSearchArticles] = useState();
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   //get the articles for a specific pages
-  const fetchArticlesByLimitPath = `/articles/latest/${indexOfFirstArticle}/${articlesPerPage}`;
+  const listType = recommended ? "recommended" : "latest";
+  const fetchArticlesByLimitPath = `/articles/${listType}/${indexOfFirstArticle}/${articlesPerPage}`;
   const {
     isLoading: articlesByLimitLoading,
     isError: articlesByLimitIsError,
@@ -57,17 +64,6 @@ const Home = () => {
   });
   const totalPages = Math.ceil(totalNumberData / articlesPerPage);
 
-  //get the most popular article in the last week
-  const {
-    isLoading: fetchTrendingIsLoading,
-    isError: fetchTrendingIsError,
-    data: trendingArticlesData,
-    error: fetchTrendingError,
-  } = useQuery({
-    queryKey: ['trendingArticles' , `/articles/trending/5`],
-    queryFn: fetchTrendingArticlesByLimit,
-  });
-
   if (articlesByLimitLoading) {
     return <h2>Is loading...</h2>;
   }
@@ -85,7 +81,6 @@ const Home = () => {
     return <div>Error: Unable to fetch article.</div>;
   }
 
-
   const listActivated = (type) => {
     if (type === "recommended") {
       setRecommended(true);
@@ -96,8 +91,8 @@ const Home = () => {
     }
   };
 
-  // 格式化日期时间函数
-  const formatDate = (dateTimeString) => {
+   // 格式化日期时间函数
+   const formatDate = (dateTimeString) => {
     const date = new Date(dateTimeString);
     const options = {
       year: "numeric",
@@ -109,6 +104,10 @@ const Home = () => {
     };
     return date.toLocaleDateString("en-US", options);
   };
+
+  const handleQueryFromSearch = (queryResult) => {
+    articlesByLimitData = queryResult;
+  }
 
   return (
     <>
@@ -136,27 +135,27 @@ const Home = () => {
             </div>
           </div>
           <div className="article-list">
-            {articlesByLimitData.map((article) => (
-              <div className="article-card" key={article.id}>
-                <NavLink to={`/articles/${article.articleId}`}>
-                  <h3>{article.title}</h3>
-                  <p>{article.content.slice(0, 30)}...</p>
-                  <p className="authorInfo">
-                    <p>{article.authorId}</p>
-                    <p>
-                      <img src={view} />
-                      {article.views}
-                    </p>
-                    <p>
-                      <img src={like} />
-                      {article.likes}
-                    </p>
-                    <p>{formatDate(article.publicationDate)}</p>
-                  </p>
-                </NavLink>
-              </div>
-            ))}
+        {articlesByLimitData.map((article) => (
+          <div className="article-card" key={article.id}>
+            <NavLink to={`/articles/${article.articleId}`}>
+              <h3>{article.title}</h3>
+              <p>{article.content.slice(0, 30)}...</p>
+              <p className="authorInfo">
+                <p>{article.authorId}</p>
+                <p>
+                  <img src={view} />
+                  {article.views}
+                </p>
+                <p>
+                  <img src={like} />
+                  {article.likes}
+                </p>
+                <p>{formatDate(article.publicationDate)}</p>
+              </p>
+            </NavLink>
           </div>
+        ))}
+      </div>
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, index) => (
               <button
@@ -170,7 +169,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <TrendingSidebar/>
+      <TrendingSidebar />
       <Contact />
       <SidebarBackground />
     </>

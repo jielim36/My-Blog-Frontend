@@ -7,6 +7,8 @@ import SearchBar from "./SearchBar";
 
 const NavigationBar = () => {
     
+    
+
     return (
         <div className="Container">
             <NavLink to='/home'>

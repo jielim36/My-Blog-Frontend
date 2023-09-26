@@ -1,0 +1,123 @@
+/* 整个页面容器 */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 900px;
+    padding: 20px;
+    margin: 0 auto;
+    user-select: none;
+
+  }
+
+  /* 文章部分容器 */
+  .article-section {
+    flex: 2;
+    padding: 20px 0px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1); /* 这里定义阴影效果 */
+
+  }
+
+  .result p {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0px 0px 10px 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2f54eb; /* 字体颜色 */
+  }
+  
+  .article-list {
+    display: grid;
+    grid-template-columns: 1fr; /* 每行只显示一个文章元素 */
+    gap: 20px;
+    max-height: 1300px;
+    overflow-y: auto;
+  }
+  
+  .article-card {
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px 0px 10px 15px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* 添加阴影和 transform 的动画效果 */
+  }
+
+.article-card .authorInfo{
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+.authorInfo p{
+  display: inline-flex;
+  padding: 0px 15px;
+}
+
+.authorInfo p:first-child {
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* 这里可以设置你想要的边框样式 */
+  padding-left: 0px;
+}
+
+.authorInfo img{
+  margin-right: 2px;
+  width: 20px;
+}
+
+.authorInfo p:last-child{
+  position: absolute;
+  right: 1%;
+}
+  
+  .article-card:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 鼠标悬停时的阴影效果 */
+    transform: translateY(-5px); /* 向上浮动效果 */
+  }
+  
+  
+  
+  .article-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .article-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+  }
+  
+
+  /* 分页容器 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 页数按钮样式 */
+.page {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* 当前页的按钮样式 */
+.active-page {
+  background-color: #2f54eb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: default;
+}

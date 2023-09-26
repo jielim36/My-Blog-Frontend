@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState , createContext } from 'react';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import { fetchArticlesByTitle } from './FetchAPI';
+import { NavLink, Navigate, useNavigate} from 'react-router-dom';
 
 // 使用 styled-components 创建一个带样式的搜索框容器
 const SearchContainer = styled.div`
@@ -36,27 +39,28 @@ const SearchButton = styled.button`
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
+  const nav = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    // 在这里执行搜索逻辑，可以使用 query 变量来获取搜索关键字
-    console.log('Searching for:', query);
+    // window.location.href = `/query/${query}`;
+    nav(`/query/${query}`);
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <SearchButton type="submit">
-          Search
-        </SearchButton>
-      </SearchContainer>
-    </form>
+      <form onSubmit={handleSearch}>
+        <SearchContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <SearchButton type="submit">
+              Search
+          </SearchButton>
+        </SearchContainer>
+      </form>
   );
 };
 

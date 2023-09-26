@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchArticleById, updateArticleById } from "./FetchAPI";
 import axios from "axios";
+import ArticleInteraction from "./ArticleInteraction";
 
 const ArticlePage = () => {
   const path = window.location.pathname;
@@ -40,20 +41,23 @@ const ArticlePage = () => {
   }
 
   return (
-    <div className="article-container">
-      <div className="article-header">
-        <h1 className="title">{article.title}</h1>
-        <div className="author-info">
-          <span className="author">Author: {article.authorId}</span>
-          <span></span>
-          <span className="date">
-            Published Date: {article.publicationDate}
-          </span>
+    <>
+      <div className="article-container">
+        <div className="article-header">
+          <h1 className="title">{article.title}</h1>
+          <div className="author-info">
+            <span className="author">Author: {article.authorId}</span>
+            <span></span>
+            <span className="date">
+              Published Date: {article.publicationDate}
+            </span>
+          </div>
         </div>
+        <div className="article-content">{article.content}</div>
+        <Contact />
+        <ArticleInteraction />
       </div>
-      <div className="article-content">{article.content}</div>
-      <Contact />
-    </div>
+    </>
   );
 };
 

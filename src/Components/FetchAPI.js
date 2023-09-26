@@ -36,3 +36,15 @@ export const fetchTrendingArticlesByLimit = async ({ queryKey }) => {
   const response = await axObj.get(fetchArticlesByLimitPath)
   return response.data;
 };
+
+export const fetchArticlesByContent = async ({ queryKey }) => {
+  const [_key, Path] = queryKey;
+  const response = await axObj.get(Path)
+  return response.data;
+};
+
+export const fetchArticlesTitleByLimit = async ({ queryKey }) => {
+  const [_key, Path] = queryKey;
+  const response = await axObj.get(Path)
+  return response.data;
+};

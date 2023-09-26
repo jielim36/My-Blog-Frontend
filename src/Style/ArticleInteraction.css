@@ -1,0 +1,51 @@
+.InteractionContainer {
+    display: flex;
+    justify-content: space-around; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    flex-direction: column;
+    width: 50px;
+    position: absolute;
+    left: -7%;
+    top: 100px;
+    user-select: none;
+  }
+  
+  .likes,
+  .saved,
+  .comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    text-align: center;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 可选：调整图像的大小 */
+  .likes img,
+  .saved img,
+  .comments img {
+    width: 25px; /* 调整图像宽度 */
+    height: 25px; /* 调整图像高度 */
+    transform: translateY(50%);
+  }
+
+  .likes:hover img:not(.activated) {
+    /* 在悬停时显示不同的图像 */
+    content: url('../Assets/like hover.png'); /* 请替换成您的图像路径 */
+  }
+  
+  .saved:hover img:not(.activated) {
+    /* 在悬停时显示不同的图像 */
+    content: url('../Assets/saved hover.png'); /* 请替换成您的图像路径 */
+  }
+  
+  .comments:hover img:not(.activated) {
+    /* 在悬停时显示不同的图像 */
+    content: url('../Assets/comment hover.png'); /* 请替换成您的图像路径 */
+  }
+  

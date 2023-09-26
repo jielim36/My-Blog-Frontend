@@ -73,8 +73,6 @@
     color: black;
   }
 
-  
-  /* 文章列表容器 */
   .article-list {
     display: grid;
     grid-template-columns: 1fr; /* 每行只显示一个文章元素 */
@@ -135,32 +133,33 @@
     margin: 0;
   }
   
-/* 分页容器 */
+
+  /* 分页容器 */
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  /* 页数按钮样式 */
-  .page {
-    background-color: #ccc;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  /* 当前页的按钮样式 */
-  .active-page {
-    background-color: #2f54eb;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: default;
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 页数按钮样式 */
+.page {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* 当前页的按钮样式 */
+.active-page {
+  background-color: #2f54eb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: default;
+}

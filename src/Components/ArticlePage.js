@@ -6,6 +6,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchArticleById, updateArticleById } from "./FetchAPI";
 import axios from "axios";
 import ArticleInteraction from "./ArticleInteraction";
+import Login from "./Login";
 
 const ArticlePage = () => {
   const path = window.location.pathname;
@@ -57,6 +58,7 @@ const ArticlePage = () => {
         <Contact />
         <ArticleInteraction />
       </div>
+      <Login />
     </>
   );
 };

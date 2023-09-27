@@ -48,3 +48,9 @@ export const fetchArticlesTitleByLimit = async ({ queryKey }) => {
   const response = await axObj.get(Path)
   return response.data;
 };
+
+export const fetchUserById = async ({queryKey}) => {
+  const [_key, path] = queryKey;
+  const response = await axObj.get(path);
+  return response.data;
+};

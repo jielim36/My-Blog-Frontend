@@ -37,7 +37,6 @@
     transition: max-height 0.3s ease-in; /* 添加过渡效果 */
 }
 
-
 .dropdown {
     position: absolute;
     visibility: hidden;
@@ -118,4 +117,8 @@
     right: 0%;
     width: 16px;
     height: 50%;
+}
+
+.container .userIcon.anonymous:hover img {
+    border: 2px solid #2f54eb;
 }

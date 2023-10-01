@@ -9,6 +9,7 @@ import savedActivated_logo from '../Assets/Saved_Activated.png';
 import comments_logo from '../Assets/comment.png';
 import comments_hover_logo from '../Assets/comment hover.png';
 import commentsActivated_logo from '../Assets/comment_Activated.png';
+import Login from './Login';
 
 
 export default function ArticleInteraction() {
@@ -17,30 +18,41 @@ export default function ArticleInteraction() {
     const [saved , setSaved] = useState(false);
     const [comment , setComment] = useState(false);
 
+    // const checkToken = ()=>{
+    //     if(token){
+    //         setLike(!like)
+    //     }
+    //     console.log("no token!");
+        
+    // }
+
 
   return (
-    <div className='InteractionContainer'>
-        <div className='likes' onClick={()=>{setLike(!like)}}>
-            {like ? 
-                <img src={likeActivated_logo} className='activated' alt='likeactivated'/>
-                :
-                <img src={like_logo} alt='like'/>
-            }
+    <>
+        <div className='InteractionContainer'>
+            <div className='likes' onClick={()=>{setLike(!like)}}>
+                {like ? 
+                    <img src={likeActivated_logo} className='activated' alt='likeactivated'/>
+                    :
+                    <img src={like_logo} alt='like'/>
+                }
+            </div>
+            <div className='saved' onClick={()=>{setSaved(!saved)}}>
+                {saved ? 
+                    <img src={savedActivated_logo} className='activated' alt='likeactivated'/>
+                    :
+                    <img src={saved_logo} alt='like'/>
+                }
+            </div>
+            <div className='comments' onClick={()=>{setComment(!comment)}}>
+                {comment ? 
+                    <img src={commentsActivated_logo} className='activated' alt='likeactivated'/>
+                    :
+                    <img src={comments_logo} alt='like'/>
+                }
+            </div>
         </div>
-        <div className='saved' onClick={()=>{setSaved(!saved)}}>
-            {saved ? 
-                <img src={savedActivated_logo} className='activated' alt='likeactivated'/>
-                :
-                <img src={saved_logo} alt='like'/>
-            }
-        </div>
-        <div className='comments' onClick={()=>{setComment(!comment)}}>
-            {comment ? 
-                <img src={commentsActivated_logo} className='activated' alt='likeactivated'/>
-                :
-                <img src={comments_logo} alt='like'/>
-            }
-        </div>
-    </div>
+        {/* {!token && (like||saved||comment)? <Login /> :''} */}
+    </>
   )
 }

@@ -37,7 +37,7 @@ const ArticlePage = () => {
   }
 
   if (isError) {
-    console.error("Error fetching article:", error);
+    console.error("Error fetching article:", error.response.status);
     return <div>Error: Unable to fetch article.</div>;
   }
 

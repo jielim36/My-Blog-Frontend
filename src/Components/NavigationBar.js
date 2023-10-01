@@ -1,12 +1,22 @@
 import React from "react";
 import J_logo from '../Assets/J.png'
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import '../Style/NavigationBar.css';
 import UserIcon from "./UserIcon";
 import SearchBar from "./SearchBar";
 
 const NavigationBar = () => {
+
+    const nav = useNavigate();
     
+    const checkLogin = (event)=>{
+        if(!localStorage.getItem('token')){
+            event.preventDefault();
+            console.log("Did not login...");
+            console.log('local:' + localStorage.getItem('token'));
+            nav('/login');
+        }
+    }
     
 
     return (
@@ -36,7 +46,8 @@ const NavigationBar = () => {
                 </li>
                 <li>
                     <NavLink 
-                      to="/creatorhub" 
+                      to="/creatorhub/1001" 
+                      onClick={checkLogin}
                       style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
                       className="nav-link">Creator Hub</NavLink>
                 </li>

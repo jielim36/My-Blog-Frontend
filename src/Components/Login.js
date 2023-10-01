@@ -1,58 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Style/Login.css";
-import { fetchUserById } from "./FetchAPI";
-import { useQuery } from "@tanstack/react-query";
+import { loginRequest } from "./FetchAPI";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-  const [loginState , setLoginState] = useState(false);
-  const [usernameFormat , setUsernameFormat] = useState(true);
-  const [passwordFormat , setPasswordFormat] = useState(true);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login(props) {
+  const [loginState, setLoginState] = useState(false);
+  const [usernameFormat, setUsernameFormat] = useState(true);
+  const [passwordFormat, setPasswordFormat] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const nav = useNavigate();
 
-  const { isInitialLoading, isError, data, error, refetch, isFetching } =
-  useQuery({
-    queryKey: ['user',`/users/login/${username}/${password}`],
-    queryFn: fetchUserById,
-    enabled: false,
-  })
+  useEffect(() => {
+    setLoginForm({ email: username, password: password });
+  }, [username, password]);
+
+  const loginMutation = useMutation({
+    mutationFn: (formData) => {
+      return loginRequest(formData);
+    },
+  });
 
   const handleUserInfo = (e) => {
     e.preventDefault();
     console.log("userinfo");
     if (username.length <= 5) {
       setUsernameFormat(false);
-    }else{
+    } else {
       setUsernameFormat(true);
     }
     if (password.length <= 5) {
       setPasswordFormat(false);
-    }else{
+    } else {
       setPasswordFormat(true);
     }
-    
-    if(username.length > 5 && password.length > 5){
-      console.log('format!');
-      refetch();
-    }
 
+    if (username.length > 5 && password.length > 5) {
+      console.log("format!");
+      loginMutation.mutate(loginForm);
+    }
   };
 
-  if (isInitialLoading) {
+  if (loginMutation.isLoading) {
     console.log("initial loading");
   }
 
-  if (data && !loginState) {
+  if (loginMutation.isSuccess && !loginState) {
     console.log("success!");
     setLoginState(true);
-    console.log(data);
-    return <div>hi</div>
+    console.log('My login token is : '+loginMutation.data.data);
+    localStorage.setItem('token',loginMutation.data.data);
+    return nav('/home');
   }
 
-  if(!loginState){
+
+  const closeForm = () => {
+    setLoginState(true);
+  };
+
+  if (!loginState) {
     return (
       <div className="loginContainer">
-        <div className="cancel">X</div>
+        <div className="cancel" onClick={closeForm}>
+          X
+        </div>
         <h2>Welcome!</h2>
         <span className="sentence">
           "Log in with your account to start blogging!"
@@ -67,18 +80,22 @@ export default function Login() {
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
-              className={`${usernameFormat ? '':'notFormat'}`}
+              className={`${usernameFormat ? "" : "notFormat"}`}
             />
-            <div className={`remind ${usernameFormat ? '' : 'errorInput'}`}>Username length must greater than 5!</div>
+            <div className={`remind ${usernameFormat ? "" : "errorInput"}`}>
+              Username length must greater than 5!
+            </div>
             <input
               type="password"
               name="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`${usernameFormat ? '':'notFormat'}`}
+              className={`${usernameFormat ? "" : "notFormat"}`}
             />
-            <div className={`remind ${passwordFormat ? '' : 'errorInput'}`}>Password length must greater than 5!</div>
+            <div className={`remind ${passwordFormat ? "" : "errorInput"}`}>
+              Password length must greater than 5!
+            </div>
           </div>
           <div className="option">
             <span>Forgot Password?</span>
@@ -86,9 +103,11 @@ export default function Login() {
           </div>
           <input
             type="submit"
-            className={`submitButton ${username && password ? "activated" : ""}`}
+            className={`submitButton ${
+              username && password ? "activated" : ""
+            }`}
             value="Login"
-            disabled={!(username&&password)}
+            disabled={!(username && password)}
           />
         </form>
       </div>

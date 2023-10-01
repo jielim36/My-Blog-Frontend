@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
-import '../Style/UserIcon.css';
-import userIcon from '../Assets/labixiaoxin.jpg';
-import arrowRight from '../Assets/arrow-right.png';
+import React, { useEffect, useState } from "react";
+import "../Style/UserIcon.css";
+import userIcon from "../Assets/labixiaoxin.jpg";
+import arrowRight from "../Assets/arrow-right.png";
+import { fetchUserByToken } from "./FetchAPI";
+import { useQuery } from "@tanstack/react-query";
+import anonymousUser from '../Assets/anonymousUser.png';
+import Login from './Login';
 
 export default function UserIcon() {
   const [isHovered, setIsHovered] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [loginForm , setLoginForm] = useState(false);
+
+  useEffect(()=>{
+    console.log("User icon page: token is change...");
+  },[token])
+
+  const { isLoading, isError, data,refetch, error } = useQuery({
+    queryKey: ["articles", 'users/token'],
+    queryFn: fetchUserByToken,
+    enabled: false
+  });
+
+  if (token) {
+    refetch();
+  }
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -14,40 +34,66 @@ export default function UserIcon() {
     setIsHovered(false);
   };
 
-  return (
-    <div className="container">
-      <div
-        className={`userIcon ${isHovered ? 'hovered' : ''}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <img src={userIcon} alt="User Icon" />
+  const logout = () => {
+    localStorage.removeItem("token");
+  };
+
+  if(!token){
+    return (
+      <>
+        <div className="container">
+          <div className="userIcon anonymous">
+            <img src={anonymousUser} onClick={()=>{setLoginForm(!loginForm)}}/>
+          </div>
+        </div>
+        {loginForm ? <Login /> : ''}
+      </>
+    );
+  }
+
+  if(token){
+
+    return (
+      <div className="container">
+        <div
+          className={`userIcon ${isHovered ? "hovered" : ""}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img src={userIcon} alt="User Icon" />
+        </div>
+        <div
+          className={`dropdown ${isHovered ? "visible" : ""}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <ul>
+            <li className="userInfo">
+              <div>
+                <p className="number">50</p>
+                <p className="type">Follow</p>
+              </div>
+              <div>
+                <p className="number">10</p>
+                <p className="type">Follower</p>
+              </div>
+              <div>
+                <p className="number">4</p>
+                <p className="type">Articles</p>
+              </div>
+            </li>
+            <li>
+              Profile <img src={arrowRight} alt="Arrow Right" />
+            </li>
+            <li>
+              Settings <img src={arrowRight} alt="Arrow Right" />
+            </li>
+            <li onClick={logout}>
+              Logout <img src={arrowRight} alt="Arrow Right" />
+            </li>
+          </ul>
+        </div>
       </div>
-      <div
-        className={`dropdown ${isHovered ? 'visible' : ''}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <ul>
-          <li className='userInfo'>
-            <div>
-              <p className='number'>50</p>
-              <p className='type'>Follow</p>
-            </div>
-            <div>
-              <p className='number'>10</p>
-              <p className='type'>Follower</p>
-            </div>
-            <div>
-              <p className='number'>4</p>
-              <p className='type'>Articles</p>
-            </div>
-          </li>
-          <li>Profile <img src={arrowRight} alt="Arrow Right" /></li>
-          <li>Settings <img src={arrowRight} alt="Arrow Right" /></li>
-          <li>Logout <img src={arrowRight} alt="Arrow Right" /></li>
-        </ul>
-      </div>
-    </div>
-  );
+    );
+  }  
 }

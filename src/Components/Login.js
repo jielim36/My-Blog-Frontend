@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Style/Login.css";
 import { loginRequest } from "./FetchAPI";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 export default function Login(props) {
   const [loginState, setLoginState] = useState(false);
@@ -12,6 +12,12 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const nav = useNavigate();
+
+  if(localStorage.getItem('token') && !loginState){
+    console.log("Login successfully...");
+    // setLoginState(true);
+    // nav('/home');
+  }
 
   useEffect(() => {
     setLoginForm({ email: username, password: password });
@@ -52,6 +58,7 @@ export default function Login(props) {
     setLoginState(true);
     console.log('My login token is : '+loginMutation.data.data);
     localStorage.setItem('token',loginMutation.data.data);
+    window.location.reload();
     return nav('/home');
   }
 

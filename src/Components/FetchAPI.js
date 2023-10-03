@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Login from "./Login";
 
 const BASE_URL = "http://localhost:8080";
 const controller = new AbortController();
@@ -15,20 +16,20 @@ const config = {
   },
 };
 
-// axObj.interceptors.request.use(
-//   (config) => {
-//     // 在这里查看请求的所有信息
-//     console.log("Request Config:", config);
+axObj.interceptors.request.use(
+  (config) => {
+    // 在这里查看请求的所有信息
+    console.log("Request Config:", config);
 
-//     // 返回配置，以便请求继续发送
-//     return config;
-//   },
-//   (error) => {
-//     // 请求错误时执行
-//     console.error("Request Error:", error);
-//     return Promise.reject(error);
-//   }
-// );
+    // 返回配置，以便请求继续发送
+    return config;
+  },
+  (error) => {
+    // 请求错误时执行
+    console.error("Request Error:", error);
+    return Promise.reject(error);
+  }
+);
 
 // // 响应拦截器：在响应被处理之前执行
 // axObj.interceptors.response.use(
@@ -94,8 +95,12 @@ export const fetchArticlesTitleByLimit = async ({ queryKey }) => {
 
 export const fetchArticlesByAuthorId = async ({ queryKey }) => {
   const [_key, data] = queryKey;
-  const response = await axObj.get(data, config);
-  return response.data;
+  try {
+    const response = await axObj.get(data, config);
+    return response.data;
+  } catch (error) {
+    return { redirectTo: '/home', renderComponent: <Login /> };
+  }
 };
 
 export const fetchUserById = async ({ queryKey }) => {

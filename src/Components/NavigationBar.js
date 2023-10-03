@@ -1,58 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import J_logo from '../Assets/J.png'
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import '../Style/NavigationBar.css';
 import UserIcon from "./UserIcon";
 import SearchBar from "./SearchBar";
+import Login from "./Login";
 
 const NavigationBar = () => {
 
     const nav = useNavigate();
+    const [loginForm , setLoginForm] = useState(false);
     
     const checkLogin = (event)=>{
         if(!localStorage.getItem('token')){
             event.preventDefault();
             console.log("Did not login...");
-            console.log('local:' + localStorage.getItem('token'));
-            nav('/login');
+            setLoginForm(true);
         }
     }
     
 
     return (
-        <div className="Container">
-            <NavLink to='/home'>
-                <img src={J_logo} alt="None"></img>
-            </NavLink>
-            <div className="searchBar">
-                <SearchBar />
+        <>
+            <div className="Container">
+                <NavLink to='/home'>
+                    <img src={J_logo} alt="None"></img>
+                </NavLink>
+                <div className="searchBar">
+                    <SearchBar />
+                </div>
+                <ul>
+                    <li className="userInfo">
+                        <UserIcon />
+                    </li>
+                    <li>
+                        <NavLink 
+                        exact
+                        to="/home" 
+                        style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
+                        className="nav-link">Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                        to="/about" 
+                        style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
+                        className="nav-link">About</NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                        to="/creatorhub/1001" 
+                        onClick={checkLogin}
+                        style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
+                        className="nav-link">Creator Hub</NavLink>
+                    </li>
+                </ul>
             </div>
-            <ul>
-                <li className="userInfo">
-                    <UserIcon />
-                </li>
-                <li>
-                    <NavLink 
-                      exact
-                      to="/home" 
-                      style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
-                      className="nav-link">Home</NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                      to="/about" 
-                      style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
-                      className="nav-link">About</NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                      to="/creatorhub/1001" 
-                      onClick={checkLogin}
-                      style={({isActive})=> {return isActive ? {background:"#2f54eb",color:"white",borderRadius:'6px'} : null}}
-                      className="nav-link">Creator Hub</NavLink>
-                </li>
-            </ul>
-        </div>
+            {loginForm ? <Login /> : ''}
+        </>
     );
 }
 

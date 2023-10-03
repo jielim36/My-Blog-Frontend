@@ -4,26 +4,51 @@ import userIcon from "../Assets/labixiaoxin.jpg";
 import arrowRight from "../Assets/arrow-right.png";
 import { fetchUserByToken } from "./FetchAPI";
 import { useQuery } from "@tanstack/react-query";
-import anonymousUser from '../Assets/anonymousUser.png';
-import Login from './Login';
+import anonymousUser from "../Assets/anonymousUser.png";
+import Login from "./Login";
+import { useNavigate } from "react-router-dom";
 
 export default function UserIcon() {
   const [isHovered, setIsHovered] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [loginForm , setLoginForm] = useState(false);
+  const [loginForm, setLoginForm] = useState(false);
+  const nav = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("User icon page: token is change...");
-  },[token])
+  }, [token]);
 
-  const { isLoading, isError, data,refetch, error } = useQuery({
-    queryKey: ["articles", 'users/token'],
+  const {
+    isLoading: userIsLoading,
+    isError: userIsError,
+    data: userData,
+    refetch: userRefetch,
+    error: userError,
+  } = useQuery({
+    queryKey: ["articles", "users/token"],
     queryFn: fetchUserByToken,
-    enabled: false
+    enabled: false,
+  });
+
+  const {
+    isLoading:statIsLoading,
+    isError:statIsError,
+    data: userStatData,
+    refetch: statRefetch,
+    error:statError,
+  } = useQuery({
+    queryKey: ["articles", `follow/stat/${userData.userId || ''}`],
+    queryFn: fetchUserByToken,
+    enabled: false,
   });
 
   if (token) {
-    refetch();
+    console.log("detect token, get user info by token");
+    userRefetch();
+    console.log(userData);
+  }
+  if (userData) {
+    statRefetch();
   }
 
   const handleMouseEnter = () => {
@@ -36,23 +61,29 @@ export default function UserIcon() {
 
   const logout = () => {
     localStorage.removeItem("token");
+    nav("/home");
+    window.location.reload();
   };
 
-  if(!token){
+  if (!token) {
     return (
       <>
         <div className="container">
           <div className="userIcon anonymous">
-            <img src={anonymousUser} onClick={()=>{setLoginForm(!loginForm)}}/>
+            <img
+              src={anonymousUser}
+              onClick={() => {
+                setLoginForm(!loginForm);
+              }}
+            />
           </div>
         </div>
-        {loginForm ? <Login /> : ''}
+        {loginForm ? <Login /> : ""}
       </>
     );
   }
 
-  if(token){
-
+  if (token && userData && userStatData) {
     return (
       <div className="container">
         <div
@@ -67,18 +98,19 @@ export default function UserIcon() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          <div className="userName">{userData.userName}</div>
           <ul>
             <li className="userInfo">
               <div>
-                <p className="number">50</p>
-                <p className="type">Follow</p>
+                <p className="number">{userStatData.following}</p>
+                <p className="type">Following</p>
               </div>
               <div>
-                <p className="number">10</p>
+                <p className="number">{userStatData.follower}</p>
                 <p className="type">Follower</p>
               </div>
               <div>
-                <p className="number">4</p>
+                <p className="number">{userStatData.articles}</p>
                 <p className="type">Articles</p>
               </div>
             </li>
@@ -95,5 +127,5 @@ export default function UserIcon() {
         </div>
       </div>
     );
-  }  
+  }
 }

@@ -53,6 +53,7 @@
     font-weight: medium;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom-left-radius: 0px;
+    display: flex;
   }
   
   .popular-articles li:last-child{
@@ -63,3 +64,30 @@
     background-color: #f5f5f5;
   }
   
+  @media screen and (max-width: 1900px) {
+    .sidebar {
+      width: 250px; /* 适应屏幕宽度 */
+      right: 1%; /* 从右侧0处开始 */
+      top: 30%; /* 从顶部0处开始 */
+      padding: 10px; /* 调整内边距 */
+    }
+    
+    .sidebar h2 {
+      font-size: 20px; /* 调整标题字体大小 */
+    }
+    
+
+    .popular-articles p:first-child,
+    .popular-articles p:last-child {
+      display: block; /* 将排列改为块状以适应小屏幕 */
+      margin-right: 0;
+    }
+
+    .popular-articles p:first-child{
+      margin-right: 10px;
+    }
+    
+    .popular-articles li a {
+      display: flex;
+    }
+  }

@@ -9,6 +9,14 @@
 
 }
 
+.articlesManageContainer h1{
+    margin: 0px;
+    color: #2f54eb;
+    padding-left: 40%;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom:  1px solid rgba(0, 0, 0, 0.1);
+}
 
 .articleCard {
     position: relative;
@@ -16,8 +24,12 @@
     border-bottom: 1px solid #ccc;
     border-radius: 5px;
     padding: 0px 0px 10px 15px;
+    margin-bottom: 10px;
     /* transition: box-shadow 0.3s ease, transform 0.3s ease; 添加阴影和 transform 的动画效果 */
   }
+.articleCard:hover {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* 这里定义阴影效果 */
+}
 
   .articleCard .authorInfo{
   margin-top: 15px;
@@ -56,10 +68,35 @@
     margin: 0;
   }
 
-.articleCard .alterButton{
-    border: 2px solid black;
+.alterButton{
+    border: 0px;
     position: absolute;
-    top: 10%;
-    right: 5%;
-    width: 100px;
+    top: 30%;
+    right: 1%;
+    display: flex;
+}
+
+.alterButton button{
+    border: 0px;
+    width: 80px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgba(5, 5, 5, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alterButton button:first-child{
+    margin-right: 10px;
+}
+
+.alterButton button img{
+    width: 20px;
+}
+
+.alterButton button:hover {
+    color: #2f54eb;
 }

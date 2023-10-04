@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Style/Home.css";
 import axios from "axios";
 import Contact from "./Contact";
@@ -51,6 +51,10 @@ const Home = () => {
     queryKey: ["articles", fetchArticlesByLimitPath],
     queryFn: fetchArticlesByLimit,
   });
+
+  useEffect(()=>{
+    console.log(articlesByLimitData);
+  },[articlesByLimitData])
 
   //get total number of articles for determine how many pages
   const {
@@ -108,6 +112,7 @@ const Home = () => {
   const handleQueryFromSearch = (queryResult) => {
     articlesByLimitData = queryResult;
   }
+
 
   return (
     <>

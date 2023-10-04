@@ -7,7 +7,7 @@
     padding: 20px;
     margin: 0 auto;
     user-select: none;
-
+    position: relative;
   }
   
   /* 仪表板容器 */

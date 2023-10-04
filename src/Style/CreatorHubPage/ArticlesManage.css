@@ -1,0 +1,65 @@
+.articlesManageContainer{
+    width: 100%;
+    user-select: none;
+}
+
+.articlesManageContainer ul{
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.articleCard {
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px 0px 10px 15px;
+    /* transition: box-shadow 0.3s ease, transform 0.3s ease; 添加阴影和 transform 的动画效果 */
+  }
+
+  .articleCard .authorInfo{
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+.authorInfo p{
+  display: inline-flex;
+  padding: 0px 15px;
+}
+
+.authorInfo p:first-child {
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* 这里可以设置你想要的边框样式 */
+  padding-left: 0px;
+}
+
+.authorInfo img{
+  margin-right: 2px;
+  width: 20px;
+}
+
+.authorInfo p:last-child{
+  position: absolute;
+  right: 1%;
+}
+
+  
+   .articleCard h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .articleCard p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+  }
+
+.articleCard .alterButton{
+    border: 2px solid black;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 100px;
+}

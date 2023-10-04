@@ -7,7 +7,7 @@ import ArticlePage from "./Components/ArticlePage";
 import {QueryClientProvider , QueryClient} from '@tanstack/react-query';
 import QueryPage from "./Components/QueryPage";
 import Profile from "./Components/Profile";
-import CreatorHub from "./Components/CreatorHub";
+import CreatorHub from "./Components/CreatorHubPage/CreatorHub";
 import Login from "./Components/Login";
 
 const queryClient = new QueryClient();

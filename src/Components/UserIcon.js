@@ -30,6 +30,11 @@ export default function UserIcon() {
     enabled: false,
   });
 
+  useEffect(()=>{
+    console.log("Error!!! :");
+    console.error(userError)
+  },[userError]);
+
   const {
     isLoading:statIsLoading,
     isError:statIsError,
@@ -37,7 +42,7 @@ export default function UserIcon() {
     refetch: statRefetch,
     error:statError,
   } = useQuery({
-    queryKey: ["articles", `follow/stat/${userData.userId || ''}`],
+    queryKey: ["articles", `follow/stat/${userData ? userData.userId : ''}`],
     queryFn: fetchUserByToken,
     enabled: false,
   });
@@ -65,23 +70,6 @@ export default function UserIcon() {
     window.location.reload();
   };
 
-  if (!token) {
-    return (
-      <>
-        <div className="container">
-          <div className="userIcon anonymous">
-            <img
-              src={anonymousUser}
-              onClick={() => {
-                setLoginForm(!loginForm);
-              }}
-            />
-          </div>
-        </div>
-        {loginForm ? <Login /> : ""}
-      </>
-    );
-  }
 
   if (token && userData && userStatData) {
     return (
@@ -128,4 +116,20 @@ export default function UserIcon() {
       </div>
     );
   }
+
+    return (
+      <>
+        <div className="container">
+          <div className="userIcon anonymous">
+            <img
+              src={anonymousUser}
+              onClick={() => {
+                setLoginForm(!loginForm);
+              }}
+            />
+          </div>
+        </div>
+        {loginForm ? <Login /> : ""}
+      </>
+    );
 }

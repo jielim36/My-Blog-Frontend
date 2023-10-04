@@ -11,6 +11,7 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const [loginFailed , setLoginFailed] = useState(false);
   const nav = useNavigate();
 
   if(localStorage.getItem('token') && !loginState){
@@ -26,6 +27,11 @@ export default function Login(props) {
   const loginMutation = useMutation({
     mutationFn: (formData) => {
       return loginRequest(formData);
+    },
+    onError: (error) => {
+      if (error.response && error.response.status === 401) {
+        setLoginFailed(true);
+      }
     },
   });
 
@@ -77,13 +83,15 @@ export default function Login(props) {
         <span className="sentence">
           "Log in with your account to start blogging!"
         </span>
+        <div className={`remind ${loginFailed ? 'loginFailed':''}`}>Login failed! please login again...</div>
         <form onSubmit={handleUserInfo}>
           <div className="userInput">
             <input
               type="text"
               name="username"
-              placeholder="Username"
+              placeholder="Email"
               value={username}
+              onFocus={()=>{setLoginFailed(false)}}
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
@@ -97,6 +105,7 @@ export default function Login(props) {
               name="password"
               placeholder="Password"
               value={password}
+              onFocus={()=>{setLoginFailed(false)}}
               onChange={(e) => setPassword(e.target.value)}
               className={`${usernameFormat ? "" : "notFormat"}`}
             />

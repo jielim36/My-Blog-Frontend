@@ -9,6 +9,7 @@ import QueryPage from "./Components/QueryPage";
 import Profile from "./Components/Profile";
 import CreatorHub from "./Components/CreatorHubPage/CreatorHub";
 import Login from "./Components/Login";
+import UploadArticle from "./Components/CreatorHubPage/UploadArticle";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/profile/:id" element={<Profile/>} />
             <Route path="/creatorhub/:id" element={<CreatorHub />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/creatorhub/:id/upload" element={<UploadArticle />} />
           </Routes>
         </QueryClientProvider>
     </div>

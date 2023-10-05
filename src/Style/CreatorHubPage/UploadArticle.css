@@ -1,0 +1,110 @@
+.ArticleWriteContainer {
+    transform: translateY(1%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    /* height: 700px; */
+    margin: 0 auto;
+  }
+  
+  .UserWritingContainer,.ArticleRenderContainer {
+    flex: 1;
+    height: 100%;
+    user-select: none;
+    border-radius: 5px;
+  }
+
+  .UserWritingContainer{
+    margin-right: 30px;
+  }
+  
+  .UserWritingContainer textarea{
+    padding: 20px 40px;
+    width: 100%;
+    height: 700px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin: 0px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; /* 设置字体大小，可以根据需要进行微调 */
+    line-height: 1.5; /* 设置行高，使文本更易于阅读 */
+    padding: 10px; /* 设置内边距，增加文本输入区域的舒适度 */
+    border: 1px solid #ccc; /* 边框样式，可根据需要进行自定义 */
+    resize: none; /* 禁用textarea的调整大小功能 */
+    outline: none; /* 取消textarea获得焦点时的默认边框 */
+    box-sizing: border-box;
+  }
+  
+  .ArticleRenderContainer{
+    padding: 20px 40px;
+    width: 100%;
+    height: 700px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin: 0px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    background-color: white;
+  }
+
+/* scroll style */
+/* 针对WebKit浏览器（如Chrome和Safari）自定义滚动条样式 */
+/* 垂直滚动条 */
+textarea::-webkit-scrollbar ,.ArticleRenderContainer::-webkit-scrollbar{
+    width: 6px; /* 设置滚动条宽度 */
+  }
+  
+textarea::-webkit-scrollbar-track,.ArticleRenderContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 设置滚动条轨道的背景颜色 */
+  }
+  
+textarea::-webkit-scrollbar-thumb,.ArticleRenderContainer::-webkit-scrollbar-thumb {
+    background: #ccc; /* 设置滚动条滑块的背景颜色 */
+    border-radius: 6px; /* 设置滚动条滑块的圆角 */
+  }
+  
+  /* 水平滚动条（如果需要） */
+textarea::-webkit-scrollbar-thumb:hover,.ArticleRenderContainer::-webkit-scrollbar-thumb:hover{
+    background: #555; /* 设置鼠标悬停时的滑块背景颜色 */
+  }
+  
+  /* 针对Firefox浏览器自定义滚动条样式 */
+textarea,.ArticleRenderContainer {
+    scrollbar-width: thin; /* 设置滚动条宽度 */
+    scrollbar-color: #888 #f1f1f1; /* 设置滚动条颜色（滑块颜色，轨道颜色） */
+  }
+  
+/* 取消textarea获得焦点后的边框 */
+textarea:focus,.ArticleRenderContainer:focus {
+    outline: none;
+  }
+  
+.postButton{
+    background-color: #2f54eb;
+    color: white;
+    border-radius: 6px;
+    width: 90px;
+    height: 40px;
+    font-weight: bold;
+    border: 0px;
+    position: absolute;
+    top: 92%;
+    right: 10%;
+    cursor: pointer;
+  }
+
+  .postButton:hover{
+    background-color: #1d39c4;
+  }
+
+  .postButton:active{
+    background-color: #2f54eb;
+  }

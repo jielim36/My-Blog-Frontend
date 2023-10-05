@@ -120,3 +120,8 @@ export const fetchUserByToken = async({queryKey}) =>{
   const response = await axObj.get(path, config);
   return response.data;
 }
+
+export const createNewArticle = async(data) => {
+  const response = await axObj.post("/users/login", data);
+  return response;
+}

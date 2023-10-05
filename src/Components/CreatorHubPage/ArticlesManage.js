@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchArticlesByAuthorId } from '../FetchAPI';
 import '../../Style/CreatorHubPage/ArticlesManage.css';
 import like from '../../Assets/like.png';
@@ -15,6 +15,7 @@ export default function ArticlesManage() {
   const [articles, setArticles] = useState([]);
   const [hoveredEditButtons, setHoveredEditButtons] = useState({}); // 用于跟踪每个 Edit 按钮的悬停状态
   const [hoveredDeleteButtons, setHoveredDeleteButtons] = useState({}); // 用于跟踪每个 Delete 按钮的悬停状态
+  const nav = useNavigate();
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["creatorhub", `/articles/author/${param.id}`],
@@ -58,7 +59,7 @@ export default function ArticlesManage() {
     setHoveredDeleteButtons((prev) => ({ ...prev, [articleId]: false }));
   };
 
-  if (localStorage.getItem('token')) {
+  if (localStorage.getItem('token') && !error) {
     return (
       <div className="articlesManageContainer">
         <h1>Content</h1>
@@ -100,6 +101,8 @@ export default function ArticlesManage() {
         </ul>
       </div>
     );
+  }else{
+    nav('/home');
   }
 
   return <h2>nothing...</h2>;

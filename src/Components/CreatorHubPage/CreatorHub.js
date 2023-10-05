@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchArticlesByAuthorId } from "../FetchAPI";
 import '../../Style/CreatorHubPage/CreatorHub.css';
 import uploadIcon from '../../Assets/upload_white.png';
@@ -21,6 +21,7 @@ export default function CreatorHub() {
     const param = useParams();
     const [articles , setArticles] = useState();
     const [navStat,setNavStat] = useState(1);
+    const nav = useNavigate();
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["creatorhub", `/articles/author/${param.id}`],
@@ -52,8 +53,8 @@ export default function CreatorHub() {
         <nav class="navigator">
             <ul>
                 <li>
-                  <button onClick={()=>{}}>
-                  <img src={uploadIcon} alt="uploadIcon"/>
+                  <button onClick={()=>{nav(`/creatorhub/${param.id}/upload`)}}>
+                  <img src={uploadIcon} alt="uploadIcon" />
                     Upload
                   </button>
                 </li>

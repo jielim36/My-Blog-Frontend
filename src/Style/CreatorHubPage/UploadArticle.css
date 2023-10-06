@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 90%;
+    width: 98%;
     /* height: 700px; */
     margin: 0 auto;
   }
@@ -16,7 +16,7 @@
   }
 
   .UserWritingContainer{
-    margin-right: 30px;
+    margin-right: 10px;
   }
   
   .UserWritingContainer textarea{

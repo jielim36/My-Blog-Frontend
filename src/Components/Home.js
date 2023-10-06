@@ -146,7 +146,7 @@ const Home = () => {
               <h3>{article.title}</h3>
               <p>{article.content.slice(0, 30)}...</p>
               <p className="authorInfo">
-                <p>{article.authorId}</p>
+                <p>{article.authorName}</p>
                 <p>
                   <img src={view} />
                   {article.views}

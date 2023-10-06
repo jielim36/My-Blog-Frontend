@@ -2,6 +2,7 @@
 
 /* 整个导航栏容器 */
 .Container {
+    /* position: fixed; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,6 +12,8 @@
     border-bottom: 2px solid rgba(47,84,235,0.2);
     box-sizing: border-box;
     user-select: none;
+    /* z-index: 1; */
+    /* width: 100%; */
   }
   
   /* Logo 图片样式 */

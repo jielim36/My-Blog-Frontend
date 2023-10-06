@@ -57,7 +57,7 @@ const ArticlePage = () => {
         <div className="article-header">
           <h1 className="title">{article.title}</h1>
           <div className="author-info">
-            <span className="author">Author: {article.authorId}</span>
+            <span className="author">Author: {article.authorName}</span>
             <span></span>
             <span className="date">
               Published Date: {article.publicationDate}

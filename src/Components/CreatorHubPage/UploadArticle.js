@@ -12,7 +12,9 @@ import { useMutation } from '@tanstack/react-query';
 import { createNewArticle } from '../FetchAPI';
 
 export default function UploadArticle() {
+  const [articleTitle , setArticleTitle] = useState('');
   const [userInput, setUserInput] = useState('');
+  const [ articleValid , setArticleValid] = useState(false);
   const param = useParams();
   const [articleForm , setArticleForm] = useState({
     articleId: null,
@@ -34,6 +36,11 @@ export default function UploadArticle() {
     setUserInput(inputValue);
   };
 
+  const handleArticleTitleInputChange = (event) => {
+    const inputValue = event.target.value;
+    setArticleTitle(inputValue);
+  };
+
   const handleTabKey = (event) => {
     if (event.key === 'Tab') {
       event.preventDefault(); // 阻止默认的Tab行为
@@ -43,6 +50,15 @@ export default function UploadArticle() {
       setUserInput(newText);
     }
   };
+
+
+  useEffect(()=>{
+    if(articleTitle.length > 10 && articleTitle.length < 30){
+      setArticleValid(true);
+    }else{
+      setArticleValid(false);
+    }
+  },[articleTitle,userInput])
 
   useEffect(()=>{
     setArticleForm({
@@ -59,6 +75,7 @@ export default function UploadArticle() {
   },[userInput, param.id])
 
   const postArticle = () =>{
+    console.log(articleValid);
     postArticleRequest.mutate(articleForm);
   }
 
@@ -74,7 +91,15 @@ export default function UploadArticle() {
 
   return (
     <>
+      
       <div className='ArticleWriteContainer'>
+        <div className='ArticleTitleContainer'>
+          <input 
+            className='inputTitle'
+            value={articleTitle}
+            onChange={handleArticleTitleInputChange}
+          />
+        </div>
         <div className='UserWritingContainer'>
           <textarea
             ref={textAreaRef} // 将 ref 绑定到文本框
@@ -151,7 +176,12 @@ export default function UploadArticle() {
         </div>
       </div>
         <div className='tools' >
-          <button className='postButton' onClick={postArticle}>Post</button>
+          <button className='postButton' 
+                  onClick={postArticle}
+                  disabled={!articleValid}
+          >
+            Post
+          </button>
         </div>
     </>
   );

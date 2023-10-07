@@ -7,13 +7,13 @@
 
 ## About MyBlog
 ###### Home page
-![Home page](link...)
+![Home page](https://github.com/jielim36/My-Blog-Frondend/blob/main/MyBlog%20Screenshot/home.png)
 ###### Creator Hub
-![Creator Hub](link...)
+![Creator Hub](https://github.com/jielim36/My-Blog-Frondend/blob/main/MyBlog%20Screenshot/creatorhub_content.png)
 ###### Article Editor (Support Markdown)
-![Article Editor](link...)
+![Article Editor](https://github.com/jielim36/My-Blog-Frondend/blob/main/MyBlog%20Screenshot/Article_editor.png)
 ###### Article view
-![Article view](link...)
+![Article view](https://github.com/jielim36/My-Blog-Frondend/blob/main/MyBlog%20Screenshot/Article_view.png)
 
 
 ### Project Features

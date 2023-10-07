@@ -71,6 +71,7 @@ export default function Login(props) {
 
   const closeForm = () => {
     setLoginState(true);
+    nav(`${props.path || '/home'}`);
   };
 
   if (!loginState) {

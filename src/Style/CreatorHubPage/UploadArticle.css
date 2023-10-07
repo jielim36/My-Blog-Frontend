@@ -8,10 +8,36 @@
     margin: 0 auto;
   }
 
+  .ArticleTitleContainer{
+    margin: 20px 0 10px 50px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ArticleTitleContainer span{
+    font-size: 24px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #2f54eb;
+    padding: 0px;
+    line-height: 22px;
+  }
+
   .ArticleTitleContainer .inputTitle{
-    width: 400px;
+    width: 500px;
     height: 50px;
+    font-size: 16px;
     border: 0px;
+    padding: 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-right: 20px;
+  }
+
+  .ArticleTitleContainer .inputTitle:focus{
+    outline: none;
+    border: 2px solid #2f54eb;
   }
   
   .UserWritingContainer,.ArticleRenderContainer {
@@ -101,9 +127,9 @@ textarea:focus,.ArticleRenderContainer:focus {
     height: 40px;
     font-weight: bold;
     border: 0px;
-    position: absolute;
-    top: 92%;
-    right: 10%;
+    /* position: absolute; */
+    /* top: 10%; */
+    /* right: 7%; */
     cursor: pointer;
   }
 

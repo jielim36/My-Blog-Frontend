@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# <center>MyBlog</center>
+<center>
+    <strong>
+        "A blog website based on front-end and back-end separation." 
+    </strong>
+</center>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Available Scripts
+## About MyBlog
+###### Home page
+![Home page](link...)
+###### Creator Hub
+![Creator Hub](link...)
+###### Article Editor (Support Markdown)
+![Article Editor](link...)
+###### Article view
+![Article view](link...)
 
-In the project directory, you can run:
 
-### `yarn start`
+### Project Features
+1. Front-end and back-end separation architecture.
+2. Utilizes JWT for user authentication and login.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> Backend Repo: [MyBlog-Backend](https://github.com/jielim36/My-Blog-Backend)
+> Frontend Repo: [MyBlog-Frontend](https://github.com/jielim36/My-Blog-Frondend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Build With:
+* [![Spring][Spring.png]][Spring-url]
+* [![React][React.png]][React-url]
+* [![MySQL][MySQL.png]][MySQL-url]
+* [![MyBatis][MyBatis.png]][MyBatis-url]
+* [![TanStack][TanStack.png]][TanStack-url]
+* [![React-markdown][React-markdown.png]][React-markdown-url]
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Spring.png]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
+[Spring-url]: https://spring.io/
+[React.png]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[MySQL.png]: https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white
+[MySQL-url]: https://www.mysql.com/
+[MyBatis.png]: https://img.shields.io/badge/MyBatis-000000?style=for-the-badge&logo=mybatis&logoColor=white
+[MyBatis-url]: https://mybatis.org/
+[TanStack.png]: https://img.shields.io/badge/TanStack-333333?style=for-the-badge
+[TanStack-url]: https://tanstack.com/
+[React-markdown.png]: https://img.shields.io/badge/React--markdown-61DAFB?style=for-the-badge
+[React-markdown-url]: https://github.com/remarkjs/react-markdown

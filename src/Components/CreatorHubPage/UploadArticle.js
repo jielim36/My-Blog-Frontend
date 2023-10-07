@@ -18,7 +18,7 @@ export default function UploadArticle() {
   const param = useParams();
   const [articleForm , setArticleForm] = useState({
     articleId: null,
-    title: "my new article!",
+    title: articleTitle,
     content: userInput,
     authorId: param.userId,
     publication_date: "",
@@ -63,7 +63,7 @@ export default function UploadArticle() {
   useEffect(()=>{
     setArticleForm({
       articleId: null,
-      title: "my new article!",
+      title: articleTitle,
       content: userInput,
       authorId: param.id,
       publication_date: "",
@@ -91,15 +91,24 @@ export default function UploadArticle() {
 
   return (
     <>
-      
-      <div className='ArticleWriteContainer'>
-        <div className='ArticleTitleContainer'>
-          <input 
-            className='inputTitle'
-            value={articleTitle}
-            onChange={handleArticleTitleInputChange}
-          />
+      <div className='ArticleTitleContainer'>
+        <span>Title:</span>
+        <input 
+          className='inputTitle'
+          value={articleTitle}
+          onChange={handleArticleTitleInputChange}
+          placeholder='Title...'
+        />
+        <div className='tools' >
+            <button className='postButton' 
+                    onClick={postArticle}
+                    disabled={!articleValid}
+            >
+              Post
+            </button>
         </div>
+      </div>
+      <div className='ArticleWriteContainer'>
         <div className='UserWritingContainer'>
           <textarea
             ref={textAreaRef} // 将 ref 绑定到文本框
@@ -175,14 +184,6 @@ export default function UploadArticle() {
           />
         </div>
       </div>
-        <div className='tools' >
-          <button className='postButton' 
-                  onClick={postArticle}
-                  disabled={!articleValid}
-          >
-            Post
-          </button>
-        </div>
     </>
   );
 }
